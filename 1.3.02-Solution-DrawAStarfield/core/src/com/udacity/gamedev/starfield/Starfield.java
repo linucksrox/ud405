@@ -2,6 +2,7 @@ package com.udacity.gamedev.starfield;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -35,9 +36,10 @@ import java.util.Random;
 
 public class Starfield extends ApplicationAdapter {
 
-    private static final float STAR_DENSITY = 0.1f;
+    private static final float STAR_DENSITY = 0.4f;
     ShapeRenderer shapeRenderer;
     Array<Vector2> stars;
+    Array<Color> colors;
 
     @Override
     public void create () {
@@ -54,12 +56,18 @@ public class Starfield extends ApplicationAdapter {
         int starCount = (int)(screenHeight * screenWidth * density);
         // TODO: Create a new array of Vector2's to hold the star positions
         stars = new Array<Vector2>(starCount);
+        colors = new Array<Color>(starCount);
         // TODO: Use java.util.Random to fill the array of star positions
         Random random = new Random();
         for (int i = 0; i < starCount; i++){
             int x = random.nextInt(screenWidth);
             int y = random.nextInt(screenHeight);
+            float red = random.nextFloat();
+            float green = random.nextFloat();
+            float blue = random.nextFloat();
+            float alpha = random.nextFloat();
             stars.add(new Vector2(x, y));
+            colors.add(new Color(red, green, blue, alpha));
         }
     }
 
@@ -79,9 +87,11 @@ public class Starfield extends ApplicationAdapter {
 
         // TODO: Begin a shapeRenderer batch using ShapeType.Point
         shapeRenderer.begin(ShapeType.Point);
+
         // TODO: Loop through the star positions and use shapeRenderer to draw points
-        for (Vector2 star : stars){
-            shapeRenderer.point(star.x, star.y, 0);
+        for (int i = 0; i < stars.size; i++) {
+            shapeRenderer.setColor(colors.get(i));
+            shapeRenderer.point(stars.get(i).x, stars.get(i).y, 0);
         }
         // TODO: End the shapeRenderer batch
         shapeRenderer.end();
@@ -95,5 +105,5 @@ public class Starfield extends ApplicationAdapter {
     }
 }
 
-// TODO: Challenge - Make technicolor stars using shapeRenderer.setColor();
+// TODO: Challenge - Make technicolor stars using shapeRenderer.setColor(); -- DONE
 // TODO: Challenge - Draw the Milky Way using a band of denser stars
