@@ -36,7 +36,7 @@ import java.util.Random;
 
 public class Starfield extends ApplicationAdapter {
 
-    private static final float STAR_DENSITY = 0.4f;
+    private static final float STAR_DENSITY = 0.2f;
     ShapeRenderer shapeRenderer;
     Array<Vector2> stars;
     Array<Color> colors;
@@ -53,6 +53,10 @@ public class Starfield extends ApplicationAdapter {
         // TODO: Figure out how many stars to draw. You'll need the screen dimensions, which you can get using Gdx.graphics.getWidth() and Gdx.graphics.getHeight().
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
+        int lowestPoint = (int)(screenHeight * 0.65f);
+        int highestPoint = (int)(screenHeight * 0.75f);
+        int range = highestPoint - lowestPoint;
+        int yCenter = screenHeight / 4;
         int starCount = (int)(screenHeight * screenWidth * density);
         // TODO: Create a new array of Vector2's to hold the star positions
         stars = new Array<Vector2>(starCount);
@@ -61,7 +65,8 @@ public class Starfield extends ApplicationAdapter {
         Random random = new Random();
         for (int i = 0; i < starCount; i++){
             int x = random.nextInt(screenWidth);
-            int y = random.nextInt(screenHeight);
+            double gaussian = random.nextGaussian() * range + lowestPoint;
+            int y = (int) (gaussian / 2) + yCenter;
             float red = random.nextFloat();
             float green = random.nextFloat();
             float blue = random.nextFloat();
@@ -106,4 +111,4 @@ public class Starfield extends ApplicationAdapter {
 }
 
 // TODO: Challenge - Make technicolor stars using shapeRenderer.setColor(); -- DONE
-// TODO: Challenge - Draw the Milky Way using a band of denser stars
+// TODO: Challenge - Draw the Milky Way using a band of denser stars -- DONE (I think)
