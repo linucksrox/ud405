@@ -2,8 +2,10 @@ package com.udacity.gamedev.drawthecantorgasket;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 
 /*
@@ -18,6 +20,7 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
 
     ShapeRenderer shapeRenderer;
     // TODO: Set a constant for how many recursions to draw. 5 is a good place to start
+    public static final int recursions = 5;
 
     @Override
     public void create () {
@@ -34,10 +37,25 @@ public class DrawTheCantorGasket extends ApplicationAdapter {
         Rectangle bounds = findLargestSquare();
 
         // TODO: Begin a filled shapeRenderer batch
+        shapeRenderer.begin(ShapeType.Filled);
 
         // TODO: Draw a white square matching the bounds
+        int screenWidth = Gdx.graphics.getWidth();
+        int screenHeight = Gdx.graphics.getHeight();
+        int width = screenWidth;
+        int height = screenHeight;
+        if (screenHeight > screenWidth) {
+            height = width;
+        }
+        else {
+            width = height;
+        }
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.rect((screenWidth - width) / 2, (screenHeight - height) / 2, width, height);
 
         // TODO: Set the working color to black, and call punchCantorGasket with the bounds
+        shapeRenderer.setColor(Color.BLACK);
+
 
         // TODO: End the batch
         shapeRenderer.end();
