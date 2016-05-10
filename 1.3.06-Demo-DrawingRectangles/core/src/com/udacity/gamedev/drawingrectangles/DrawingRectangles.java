@@ -31,6 +31,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 public class DrawingRectangles extends ApplicationAdapter {
 
     private ShapeRenderer shapeRenderer;
+    public static final Color FIREBRICK = new Color(0xb22222ff);
 
 
     @Override
@@ -52,38 +53,38 @@ public class DrawingRectangles extends ApplicationAdapter {
 
         // Rectangles can be drawn with either ShapeType.Filled or ShapeType.Line
         shapeRenderer.begin(ShapeType.Filled);
-        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.setColor(FIREBRICK);
 
         // Let's just draw a simple square to start
         shapeRenderer.rect(10, 10, 90, 90);
 
         // We can do even more interesting things with colors, like specifying a color for each corner!
-        shapeRenderer.rect(110, 10, 90, 90, Color.BLUE, Color.BLACK, Color.GREEN, Color.MAGENTA);
-        shapeRenderer.rect(10, 110, 90, 90, Color.RED, Color.RED, Color.BLACK, Color.BLACK);
+        shapeRenderer.rect(110, 10, 90, 90, Color.BLUE, Color.ORANGE, Color.GREEN, Color.MAGENTA);
+        shapeRenderer.rect(10, 110, 90, 90, Color.RED, Color.RED, Color.BLACK, Color.BLUE);
 
         // What happens when we draw two filled in shapes where they overlap?
         shapeRenderer.rect(210, 10, 90, 90, Color.RED, Color.RED, Color.RED, Color.RED);
         shapeRenderer.rect(230, 30, 90, 90, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN);
 
         // We can also rotate and scale rectangles!
-        // We can put the rotation origin on the corner
+        // We can put the rotation origin on the center
         shapeRenderer.setColor(Color.YELLOW);
-        shapeRenderer.rect(10, 300, 50, 50, 100, 100, 0.5f, 1, 45);
+        shapeRenderer.rect(10, 300, 50, 50, 100, 100, 0.5f, 1, 20);
         shapeRenderer.setColor(Color.GREEN);
         shapeRenderer.rect(10, 300, 50, 50, 100, 100, 0.5f, 1, 135);
 
-        // Or we can put the rotation origin in the center
+        // Or we can put the rotation origin in the corner
         shapeRenderer.setColor(Color.YELLOW);
         shapeRenderer.rect(200, 300, 0, 0, 100, 100, 0.5f, 1, 45);
         shapeRenderer.setColor(Color.GREEN);
-        shapeRenderer.rect(200, 300, 0, 0, 100, 100, 0.5f, 1, 225);
+        shapeRenderer.rect(200, 300, 0, 0, 100, 100, 0.5f, 1, 200);
 
         // Let's try making a thick line
-        shapeRenderer.setColor(Color.PURPLE);
-        shapeRenderer.rectLine(0, 200, 200, 250, 10);
+        shapeRenderer.setColor(FIREBRICK);
+        shapeRenderer.rectLine(0, 200, 200, 270, 15);
 
         // Alright, time for some silliness. Let's make a rainbow flower
-        final int steps = 25;
+        final int steps = 8;
         Color rgbColor = new Color();
         for (int i = 0; i < steps; i++) {
             // This mess converts from a position on the rainbow to an RGB color
